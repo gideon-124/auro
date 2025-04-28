@@ -47,37 +47,39 @@ const FormField = ({
 
 const styles = StyleSheet.create({
     container: {
-      marginBottom: 12, // Adjust spacing between fields
+      marginBottom: 12, 
     }, 
     placeholder:{
         color:"7b7b8b"
     },
     label: {
       fontSize: 16,
-      color: "#D1D5DB", // Equivalent to text-gray-100
-      fontFamily: "Poppins-Medium",
-      marginBottom: 6,
+      color: "#D1D5DB", 
+      fontFamily: "Poppins-Medium", 
+      marginTop:40
+      // marginBottom: 6, 
+      
     },
     inputContainer: {
       width: "100%",
-      height: 64, // Equivalent to h-16
-      paddingHorizontal: 16, // px-4
-      backgroundColor: "#1F2937", // Equivalent to bg-black-100
-      borderRadius: 16, // rounded-2xl
-      borderWidth: 2, // border-2
-      borderColor: "#374151", // border-black-200
+      height: 64,
+      paddingHorizontal: 16,
+      backgroundColor: "#1F2937",
+      borderRadius: 16,
+      borderWidth: 2,
+      borderColor: "#374151",
       flexDirection: "row",
       alignItems: "center",
     },
     input: {
       flex: 1,
-      color: "#FFFFFF", // Equivalent to text-white
+      color: "#FFFFFF", 
       fontSize: 16,
       fontFamily: "Poppins-SemiBold",
     },
     icon: {
-      width: 24, // w-6
-      height: 24, // h-6
+      width: 24,
+      height: 24, 
       
     },
   });

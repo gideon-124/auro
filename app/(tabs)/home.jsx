@@ -5,12 +5,15 @@ import {image} from "../../constants"
 import SearchInput from '../../components/SearchInput'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
-import {getAllPosts} from "../../lib/appwrite"
+import {getAllPosts, getLatestPosts} from "../../lib/appwrite"
 import useAppWrite from '../../lib/useAppWrite'
-import VideoCard from '../../components/VideoCard'
+import VideoCard from '../../components/VideoCard' 
+import { useGlobalContext } from '../../context/GlobalProvider'
 
-const Home = () => {  
-  const {data:posts, refetch} =useAppWrite(getAllPosts)
+const Home = () => {   
+  const {user, setUser, setIsLoggedIn}=useGlobalContext()
+  const {data:posts, refetch} =useAppWrite(getAllPosts) 
+  const {data:latestPosts} =useAppWrite(getLatestPosts)
   
   const [refreshing, setRefreshing]=useState(false) 
 
@@ -34,8 +37,8 @@ const Home = () => {
       <View className="my-6 px-4 space-y-6"> 
        <View className="justify-between flex-row items-start mb-4"> 
         <View>
-          <Text className="font-pmedium text-gray-100 text-sm"> Welcome back</Text> 
-          <Text className="text-2xl font-psemibold text-white"> JS Mastery</Text>
+          <Text className="font-pmedium text-gray-100 text-sm"> Welcome back, </Text> 
+          <Text className="text-2xl font-psemibold text-white">{user?.username}</Text>
         </View> 
         <View className="mt-1.5">
         <Image source={image.logoSmall} 
@@ -49,7 +52,7 @@ const Home = () => {
 
        <View className="w-full flex-1 pt-5 pb-8"> 
         <Text className="text-gray-100 text-lg font-pregular mb-3"> Latest videos</Text>
-        <Trending posts={[{id:1},{id:2},{id:3}] ?? []}/>
+        <Trending posts={latestPosts ?? []}/>
        </View>
 
       </View>

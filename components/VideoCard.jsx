@@ -1,111 +1,91 @@
-// import { View, Text, Image } from 'react-native'
-// import React from 'react' 
-// import { ResizeMode, Video } from "expo-av";
-
-// const VideoCard = ({video:{title,thumbnail, video, creator:{username, avatar} }}) => {  
-//   const [play, setPlay] = useState(false); 
-
-//     console.log("avatar", avatar)
-//   return (
-//     <View className="flex-col items-center px-4 mb-14">   
-    
-//     <View className="flex-row gap-3 items-start">
-//      <View className="justify-center items-center flex-row flex-1"> 
-//         <View className="w-[46px] h-[46px] rounded-lg border border-secondary flex justify-center items-center p-0.5">
-//         <Image
-//               source={{ uri: avatar }}
-//               className="w-full h-full rounded-lg"
-//               resizeMode="cover"
-//             />
-//         </View>
-
-//      </View>
-//     </View>
-//       {/* <Text className="text-2xl text-white">{title}</Text>   */}
-      
-//     </View>
-//   )
-// }
-
-// export default VideoCard 
-
-
-import { useState } from "react";
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import React,{useState, useRef} from 'react' 
 import { ResizeMode, Video } from "expo-av";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { icons } from '../constants';
 
-import { icons } from "../constants";
-
-const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
-  const [play, setPlay] = useState(false);
-
+const VideoCard = ({video:{title,thumbnail, video, creator:{username, avatar} }}) => {  
+  const [play, setPlay] = useState(false); 
+  const videoRef = useRef(null); 
+    console.log("avatar", avatar)
   return (
-    <View className="flex flex-col items-center px-4 mb-14">
-      <View className="flex flex-row gap-3 items-start">
-        <View className="flex justify-center items-center flex-row flex-1">
-          <View className="w-[46px] h-[46px] rounded-lg border border-secondary flex justify-center items-center p-0.5">
-            <Image
-              source={{ uri: avatar }}
-              className="w-full h-full rounded-lg"
-              resizeMode="cover"
-            />
-          </View>
+    <View className="flex-col items-center px-4 mb-14">   
+     <View className="flex-row gap-3 items-start">  
+      <View className="justify-center items-center flex-row flex-1">
+      <View style={{
+    width: 46,
+    height: 46,
+    borderWidth: 1,
+    borderColor: 'orange',
+    padding: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  }}>
+         <Image source={{uri:avatar}} 
+         className="w-full h-full rounded-lg" resizeMode='cover'/> 
 
-          <View className="flex justify-center flex-1 ml-3 gap-y-1">
-            <Text
-              className="font-psemibold text-sm text-white"
-              numberOfLines={1}
-            >
-              {title}
-            </Text>
-            <Text
-              className="text-xs text-gray-100 font-pregular"
-              numberOfLines={1}
-            >
-              {creator}
-            </Text>
-          </View>
+        </View> 
+        <View className="justify-center flex-1 ml-3 gap-y-1" style={{ marginLeft: 12, gap: 4 }} >
+         <Text className="text-white text-sm font-psemibold"  numberOfLines={1}>{title}</Text>  
+         <Text className="text-xs text-gray-100 font-pregular">{username}</Text>
         </View>
+      </View> 
 
-        <View className="pt-2">
-          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
-        </View>
+      <View className="pt-2"> 
+        <Image className="w-5 h-5" resizeMode='contain' source={icons.menu}/>
+
       </View>
 
-      {play ? (
-        <Video
-          source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
-      ) : (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        >
-          <Image
-            source={{ uri: thumbnail }}
-            className="w-full h-full rounded-xl mt-3"
-            resizeMode="cover"
-          />
+     </View> 
 
-          <Image
-            source={icons.play}
-            className="w-12 h-12 absolute"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )}
+     {play?( 
+             <Video  
+             ref={videoRef}
+               source={{ uri: video }}
+               style={{
+                width: '100%',
+                height: 240,
+                borderRadius: 12,
+                backgroundColor: '#000',
+                marginTop: 12,
+               }}
+               useNativeControls
+               shouldPlay
+               resizeMode={ResizeMode.COVER}
+               onPlaybackStatusUpdate={(status) => {
+                 if (status.didJustFinish) 
+                   setPlay(false);
+                 
+               }}
+             />
+     ):( 
+      <TouchableOpacity   
+      activeOpacity={0.7} 
+      onPress={()=>setPlay(true)}
+      style={{width: '100%',
+              height: 240, 
+              borderRadius: 12,
+              position: 'relative',
+              marginTop: 12,
+              justifyContent: 'center',
+              alignItems: 'center' 
+      }}  
+
+      >  
+        <Image  source={{uri:thumbnail}}  
+        className="h-full w-full rounded-xl mt-3" 
+        resizeMode='cover'/> 
+        <Image source={icons.play} 
+        className="w-12 h-12 absolute" resizeMode='contain'/>
+        
+      </TouchableOpacity>
+     )}
+    
+  
+      
     </View>
-  );
-};
+  )
+}
 
-export default VideoCard;
+export default VideoCard 
+

@@ -25,7 +25,7 @@ const CustomButton = ({
           animating={isLoading}
           color="#fff"
           size="small"
-          style={{ marginLeft: 8 }} // Replace className="ml-2" with inline style
+          style={{ marginLeft: 8 }}
         />
       )}
     </TouchableOpacity>
@@ -34,16 +34,16 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFA300", // Change to an actual color (not "secondary")
+    backgroundColor: "#FFA300",
     borderRadius: 12,
     minHeight: 62,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 16, // Add padding for better spacing
+    paddingHorizontal: 16,
   },
   text: {
-    color: "#161622", // Ensure text is visible
+    color: "#161622",
     fontSize: 18,
     fontWeight: "600",
   },

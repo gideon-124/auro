@@ -16,7 +16,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package":"com.ck.aoro"
+      "package": "com.ck.aoro"
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +33,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
